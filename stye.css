@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Roboto:wght@500&display=swap');
+
+.watering-button {
+    border: 1px solid black;
+    border-radius: 50px;
+    width: 36px;
+    height: 36px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+
+table {
+    
+    width: 100%;
+    border-collapse: collapse;   
+    
+}
+
+.body {
+    font-family: Roboto,Helvetica,Arial,sans-serif;
+}
+
+th {
+    position: sticky;
+    top: 0;
+    padding-bottom: 30px;
+
+}
+
+
+th, td {
+    border: 1px solid #ddd; /* Borde de 1 píxel y color gris claro */
+    padding: 8px; /* Espaciado interno de las celdas */
+    text-align: left; /* Alineación del texto a la izquierda */
+    width: 150px; /* Ancho fijo para todas las celdas */
+}
+
+.date {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.riego {
+    background-color: #B3E1F7;
+    font-size: 12px;
+    /* display: flex;
+    flex-direction: column; */
+}
+
+td.no-expand {
+    max-width: 100px; /* Puedes ajustar este valor según tus necesidades */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Puedes usar "ellipsis" para mostrar puntos suspensivos si el contenido se recorta */
+    white-space: nowrap; /* Evitar saltos de línea en el contenido */
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

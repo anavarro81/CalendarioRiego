@@ -1,0 +1,13 @@
+<!-- Modal -->
+    <div id="nuevoRiego" class="modal">
+    <div class="modal-content">
+        <span class="cerrar" onclick="cerrarModal()">&times;</span>
+        
+        <form action="">
+            <label for="titulo"> Titulo </label>
+            <input type="text">
+            <input type="date">
+        </form>
+    
+    </div>
+</div>
