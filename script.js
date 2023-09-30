@@ -6,6 +6,7 @@ const mostrarInputRiego$$ = document.querySelector("#mostrarInputRiego")
 const horaInicio$$ = document.querySelector("#horaInicio")
 const fechaRiego$$ = document.querySelector("#fechaRiego")
 
+
 const closeModal = () => {
     modal$$.style.display = 'none';
 }
@@ -41,3 +42,6 @@ for (let hora = 1; hora <= 23; hora++) {
 
 }
   
+
+let fechaActual = new Date();
+console.log(fechaActual)
