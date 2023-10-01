@@ -1,4 +1,4 @@
-daysOfWeek = ["lunes", "martes", "miércoles","jueves", "viernes", "sábado", "domingo"]
+
 
 
 
@@ -35,30 +35,51 @@ const obtenerDomingo = (fecha) => {
 }
 
 
-let fechaActual = new Date("2023-09-28");
+
+// Obtiene la semana en formato:
+// dia de la semana x(3) + dia. Ejemplo: "LUN 25", "MAR 26", "MIÉ 27"...
+const obtenerSemana= (fecha) => {
+
+    let fechaLunes = obtenerLunes(fecha)
+    let fechaDomingo = obtenerDomingo(fecha)
+    let semana = []
+    let diasSemana = ["lunes", "martes", "miércoles","jueves", "viernes", "sábado", "domingo"]    
+
+    let fecha_actual = new Date (fechaLunes)
+    
+    // Formatea la fecha y la guarda. 
+    while (fecha_actual <= fechaDomingo) {        
+
+        // Obtiene el dia del mes 1-31
+        let dia = fecha_actual.getDate();
+        let diaSemana = ""
+        
+        // Obtener el dia de la semana ('lunes', 'martes', 'miércoles'...)
+        // A partir de la posicion getDay (0 = Domingo, 1 = Lunes, 2 = Martes... ), obtenemos
+        // el dia que corresponda. 
+        if (fecha_actual.getDay() == 0) {
+            diaSemana = diasSemana[6]
+        } else {
+            diaSemana = diasSemana[fecha_actual.getDay()-1]
+        }
+
+        fecha = diaSemana.substring(0,3).toUpperCase() +  " " +  dia                
+        
+        semana.push(fecha)
+        fecha_actual.setDate(fecha_actual.getDate() + 1); 
+    }
+    console.log(semana)
+    return semana
+
+}    
 
 
-// console.log(obtenerLunes(fechaActual)) 
-    fechaActual = new Date("2023-09-25");
-    console.log(obtenerLunes(fechaActual))
 
-    fechaActual = new Date("2023-09-26");
-    console.log(obtenerLunes(fechaActual))
+let fechaActual = new Date();
+obtenerSemana(fechaActual)
 
-    fechaActual = new Date("2023-09-27");
-    console.log(obtenerLunes(fechaActual))
 
-    fechaActual = new Date("2023-09-28");
-    console.log(obtenerLunes(fechaActual))
-
-    fechaActual = new Date("2023-09-29");
-    console.log(obtenerLunes(fechaActual))
-
-    fechaActual = new Date("2023-09-30");
-    console.log(obtenerLunes(fechaActual))
-
-    fechaActual = new Date("2023-10-01");
-    console.log(obtenerLunes(fechaActual))
+    
 
 
 
