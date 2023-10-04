@@ -26,7 +26,7 @@ const obtenerDomingo = (fecha) => {
     var diaAjustado = (diaSemana - 1 + 7) % 7;
    
     // Calculamos la dierencia con el sexto dia (6), domingo.     
-    diasSumar = 6 - diaAjustado    
+    let diasSumar = 6 - diaAjustado    
     
     fechaDomingo.setDate(fechaDomingo.getDate() + diasSumar); 
 
@@ -63,7 +63,7 @@ const obtenerSemana= (fecha) => {
             diaSemana = diasSemana[fecha_actual.getDay()-1]
         }
 
-        fecha = diaSemana.substring(0,3).toUpperCase() +  " " +  dia                
+        fecha = diaSemana.substring(0,3).toUpperCase() +  "-" +  dia                
         
         semana.push(fecha)
         fecha_actual.setDate(fecha_actual.getDate() + 1); 
@@ -73,10 +73,18 @@ const obtenerSemana= (fecha) => {
 
 }    
 
+//
+
+const obtenerFechaActual = () => {
+    return new Date();
+}
 
 
-let fechaActual = new Date();
-obtenerSemana(fechaActual)
+export { obtenerFechaActual, obtenerSemana  };
+
+
+// let fechaActual = new Date();
+// obtenerSemana(fechaActual)
 
 
     
