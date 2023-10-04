@@ -1,7 +1,5 @@
-
 const diasSemana = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
 const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-
 
 
 const obtenerLunes = (fecha) => {    
@@ -17,6 +15,18 @@ const obtenerLunes = (fecha) => {
 
     return fechaLunes;
 }
+
+const formatearFechaCompleta = (fecha) => {
+
+    
+    let dia_semana = fecha.getDay()
+    let dia_mes = fecha.getDate()
+    let mes = fecha.getMonth()    
+    let fecha_formateada = diasSemana[dia_semana] + ',' + dia_mes + ' de ' + meses[mes]    
+    return fecha_formateada;
+
+}
+
 
 const obtenerDomingo = (fecha) => {    
     
@@ -36,10 +46,13 @@ const obtenerDomingo = (fecha) => {
 
 }
 
+const obtenerFechaActual = () => {
+    
+
+    return new Date();
+}
 
 
-// Obtiene la semana en formato:
-// dia de la semana x(3) + dia. Ejemplo: "LUN 25", "MAR 26", "MIÉ 27"...
 const obtenerSemana= (fecha) => {
 
     let fechaLunes = obtenerLunes(fecha)
@@ -51,7 +64,7 @@ const obtenerSemana= (fecha) => {
     
     // Formatea la fecha y la guarda. 
     while (fecha_actual <= fechaDomingo) {        
-        let fechaCompleta = formatearFechaCompleta(fecha_actual)
+        fechaCompleta = formatearFechaCompleta(fecha_actual)
         semana.push(fechaCompleta) 
         fecha_actual.setDate(fecha_actual.getDate() + 1);       
     }
@@ -60,37 +73,7 @@ const obtenerSemana= (fecha) => {
 
     return semana
 
-}    
+}  
 
-//
-
-const obtenerFechaActual = () => {
-    
-
-    return new Date();
-}
-
-const formatearFechaCompleta = (fecha) => {
-
-    
-    let dia_semana = fecha.getDay()
-    let dia_mes = fecha.getDate()
-    let mes = fecha.getMonth()    
-    let fecha_formateada = diasSemana[dia_semana] + ',' + dia_mes + ' de ' + meses[mes]    
-    return fecha_formateada;
-
-}
-
-
-
-export { obtenerFechaActual, obtenerSemana, formatearFechaCompleta };
-
-
-// let fechaActual = new Date();
-// obtenerSemana(fechaActual)
-
-
-    
-
-
-
+let fechaActual = obtenerFechaActual()
+obtenerSemana(fechaActual)

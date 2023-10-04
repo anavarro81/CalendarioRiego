@@ -9,19 +9,19 @@ const tbCalendar$$ = document.querySelector("#tb-calendar")
 const encabFechas$$ = document.querySelector("#encab-fechas")
 
 
-
-
-
 // Muestra | Oculta el modal para recoger el horario de riego.
 const closeModal = () => {
     modal$$.style.display = 'none';
 }
 
 const mostrarDatosRiegoInput = (e) => {
-    console.log('He hecho clic en una celda')
+    
     modal$$.style.display = 'flex';
     fechaRiego$$.innerHTML = e.target.id
     console.log(e.target.id)  
+
+    
+
 
 }
 
@@ -58,7 +58,15 @@ const generarCabecera = (fechas, posHoy) => {
     
     for (let [index, fecha] of fechas.entries()) {
         let encabFecha =  document.createElement('th');  
-        encabFecha.innerHTML = fecha 
+        
+        let posComa = fecha.indexOf(',') + 1
+        
+        console.log('fecha: ', fecha)
+        console.log('posComa: ', posComa)
+        let dia = fecha.substring(posComa, 2)
+        console.log('dia: ', dia)
+
+        encabFecha.innerHTML = fecha.substring(0,3).toUpperCase()
         
         if (index == posHoy-1) {
             encabFecha.classList.add('azul')
@@ -79,7 +87,7 @@ let fechas = obtenerSemana(fechaActual)
 generarCabecera(fechas, posHoy)
 
 // Obtenems las horas del dia de 01:00 a 23:00
-let horasDia = generarHorasDia()
+ let horasDia = generarHorasDia()
 
 
 for (const hora of horasDia) {
