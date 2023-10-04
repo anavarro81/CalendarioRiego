@@ -18,6 +18,7 @@ const closeModal = () => {
 }
 
 const mostrarDatosRiegoInput = (e) => {
+    console.log('He hecho clic en una celda')
     modal$$.style.display = 'flex';
     fechaRiego$$.innerHTML = e.target.id
     console.log(e.target.id)  
@@ -39,10 +40,6 @@ const generarHorasDia = () => {
 
 
 
-celdas$$.forEach((element) => {
-    element.addEventListener('click', mostrarDatosRiegoInput)
-});
-
 
   
 // Generar el encebezado con las fechas
@@ -58,12 +55,6 @@ const generarCabecera = (fechas, posHoy) => {
     encabBtnRiego.innerHTML = ""
     encabFechas$$.appendChild(encabBtnRiego) 
     
-    // for (let fecha of fechas) {        
-    //     let encabFecha =  document.createElement('th');    
-    //     encabFecha.innerHTML = fecha      
-    //     encabFechas$$.appendChild(encabFecha)    
-    // }
-
     
     for (let [index, fecha] of fechas.entries()) {
         let encabFecha =  document.createElement('th');  
@@ -107,10 +98,11 @@ for (const hora of horasDia) {
 
         let cell = document.createElement('td')
         cell.id = fecha + '-' + hora.substring(1,2)
+        cell.addEventListener('click', mostrarDatosRiegoInput)
         row.appendChild(cell)
-    }
-
-    
+    }   
     
 }
+
+
 

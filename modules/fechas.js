@@ -68,7 +68,7 @@ const obtenerSemana= (fecha) => {
         semana.push(fecha)
         fecha_actual.setDate(fecha_actual.getDate() + 1); 
     }
-    console.log(semana)
+    
     return semana
 
 }    
