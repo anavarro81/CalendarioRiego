@@ -3,11 +3,16 @@ import { obtenerFechaActual, obtenerSemana } from './modules/fechas.js';
 const celdas$$ = document.querySelectorAll("td")
 const modal$$ = document.querySelector("#infoRiego")
 const mostrarInputRiego$$ = document.querySelector("#mostrarInputRiego")
+
 const horaInicio$$ = document.querySelector("#horaInicio")
+const horaFin$$ = document.querySelector("#horaFin")
+
 const fechaRiego$$ = document.querySelector("#fechaRiego")
 const tbCalendar$$ = document.querySelector("#tb-calendar")
 const encabFechas$$ = document.querySelector("#encab-fechas")
 
+
+const formRiego$$ = document.querySelector("#formRiego")
 
 // Muestra | Oculta el modal para recoger el horario de riego.
 const closeModal = () => {
@@ -18,14 +23,19 @@ const mostrarDatosRiegoInput = (e) => {
     
     modal$$.style.display = 'flex';
     fechaRiego$$.innerHTML = e.target.id
-    console.log(e.target.id)  
-
+     
     
-
 
 }
 
-// Genera arraay con las horas desde 01:00 hasta 23:00
+const grabarRiego = (e) => {
+    e.preventDefault();
+    console.log('Estoy en grabar el riego');
+    console.log(e.target.titulo.value)
+
+}
+
+// Genera array con las horas desde 01:00 hasta 23:00
 const generarHorasDia = () => {
     
     let horasDias = [];
@@ -61,10 +71,10 @@ const generarCabecera = (fechas, posHoy) => {
         
         let posComa = fecha.indexOf(',') + 1
         
-        console.log('fecha: ', fecha)
-        console.log('posComa: ', posComa)
+        
+        
         let dia = fecha.substring(posComa, 2)
-        console.log('dia: ', dia)
+        
 
         encabFecha.innerHTML = fecha.substring(0,3).toUpperCase()
         
@@ -89,6 +99,8 @@ generarCabecera(fechas, posHoy)
 // Obtenems las horas del dia de 01:00 a 23:00
  let horasDia = generarHorasDia()
 
+ 
+
 
 for (const hora of horasDia) {
 
@@ -112,5 +124,20 @@ for (const hora of horasDia) {
     
 }
 
+// Rellenamos los campos SELECT horaInicio y horaFin con las horas desde 01:00 a 23:00h
 
+for (const hora of horasDia) {
+ 
+    let HourOptIni = document.createElement("option")
+    let HourOptFin = document.createElement("option")
+    
+    HourOptIni.value = hora
+    HourOptIni.text = hora
+    HourOptFin.value = hora
+    HourOptFin.text = hora
+    
+    horaInicio$$.appendChild(HourOptIni)
+    horaFin$$.appendChild(HourOptFin)
+}
 
+formRiego$$.addEventListener('submit', grabarRiego)
