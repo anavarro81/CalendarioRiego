@@ -15,6 +15,17 @@ const encabFechas$$ = document.querySelector("#encab-fechas")
 const formRiego$$ = document.querySelector("#formRiego")
 
 // Muestra | Oculta el modal para recoger el horario de riego.
+
+let riego = {
+    fecha: "",
+    titulo: "",
+    horaInicio: "",
+    horaFinal: ""
+}
+
+let calendarioRiegos = []
+
+
 const closeModal = () => {
     modal$$.style.display = 'none';
 }
@@ -32,6 +43,15 @@ const grabarRiego = (e) => {
     e.preventDefault();
     console.log('Estoy en grabar el riego');
     console.log(e.target.titulo.value)
+    console.log(e.target.horaInicio.value)
+    console.log(fechaRiego$$.innerHTML)
+
+    riego.titulo = e.target.titulo.value
+    calendarioRiegos.push(riego)
+    console.log(calendarioRiegos)
+    
+    // Cierra el modal y vuelve al Calendario. 
+    closeModal()
 
 }
 
