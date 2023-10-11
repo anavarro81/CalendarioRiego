@@ -1,5 +1,5 @@
 
-const diasSemana = ["D", "L", "M", "X", "J", "V", "S"];
+const diasSemana = ["DOM", "LUN", "MAR", "MIÉ", "JUE", "VIE", "SAB"];
 const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
 
@@ -54,7 +54,7 @@ const obtenerSemana= (fecha) => {
     
     // Formatea la fecha y la guarda. 
     while (fecha_actual <= fechaDomingo) {        
-        fecha_formateada = formatearFechaCompleta(fecha_actual)
+        let fecha_formateada = formatearFechaCompleta(fecha_actual)
         semana.push(fecha_formateada)
         fecha_actual.setDate(fecha_actual.getDate() + 1);       
     }
@@ -97,7 +97,7 @@ const formatearFechaCompleta = (fecha) => {
 
 
 
-// export { obtenerFechaActual, obtenerSemana, formatearFechaCompleta };
+export { obtenerFechaActual, obtenerSemana, formatearFechaCompleta };
 
 
 let fechaActual = new Date();

@@ -29,7 +29,7 @@ class Riego {
     }
   }
   
-
+  
 
 let calendarioRiegos = []
 
@@ -50,6 +50,10 @@ const mostrarDatosRiegoInput = (e) => {
 const grabarRiego = (e) => {
     e.preventDefault();
 
+    // LUN-09-09
+
+    console.log(fechaRiego$$.innerHTML)
+
     let titulo = e.target.titulo.value
     let horaInicio = e.target.horaInicio.value
     let horaFin = e.target.horaFin.value
@@ -58,6 +62,7 @@ const grabarRiego = (e) => {
     
     calendarioRiegos = [...calendarioRiegos,  nuevoRiego]
     
+    console.log(calendarioRiegos)
     
     // Cierra el modal y vuelve al Calendario. 
     closeModal()
@@ -98,11 +103,11 @@ const generarCabecera = (fechas, posHoy) => {
     for (let [index, fecha] of fechas.entries()) {
         let encabFecha =  document.createElement('th');  
         
-        let posComa = fecha.indexOf(',') + 1
+        // let posComa = fecha.indexOf(',') + 1
         
         
         
-        let dia = fecha.substring(posComa, 2)
+        let dia = fecha.substring(2, 4)
         
 
         encabFecha.innerHTML = fecha.substring(0,3).toUpperCase()
@@ -146,7 +151,7 @@ for (const hora of horasDia) {
     for (const fecha of fechas) {
 
         let cell = document.createElement('td')
-        cell.id = fecha + '-' + hora.substring(1,2)
+        cell.id = fecha + '-' + hora.substring(0,2)
         cell.addEventListener('click', mostrarDatosRiegoInput)
         row.appendChild(cell)
     }   
