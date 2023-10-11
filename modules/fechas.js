@@ -1,5 +1,5 @@
 
-const diasSemana = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+const diasSemana = ["D", "L", "M", "X", "J", "V", "S"];
 const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
 
@@ -54,16 +54,12 @@ const obtenerSemana= (fecha) => {
     
     // Formatea la fecha y la guarda. 
     while (fecha_actual <= fechaDomingo) {        
-        console.log('fecha_actual > ', fecha_actual)
-        // let fechaCompleta = formatearFechaCompleta(fecha_actual)
-        // semana.push(fechaCompleta) 
-        // semana.push(fecha_actual)
-        semana.push(new Date(fecha_actual)) 
-        console.log('semana -->', semana)
+        fecha_formateada = formatearFechaCompleta(fecha_actual)
+        semana.push(fecha_formateada)
         fecha_actual.setDate(fecha_actual.getDate() + 1);       
     }
     
-    // console.log('Semana final:', semana)
+    console.log('Semana final:', semana)
 
     return semana
 
@@ -77,13 +73,24 @@ const obtenerFechaActual = () => {
     return new Date();
 }
 
+
+// Formatea una fecha a formato D-dd-mm
+// D -> Dia de la semana, D = Domingo, L = Lunes, M = Martes. 
+// dd -> día del mes
+// mm -> numero de mes
+
 const formatearFechaCompleta = (fecha) => {
 
     
     let dia_semana = fecha.getDay()
-    let dia_mes = fecha.getDate()
-    let mes = fecha.getMonth()    
-    let fecha_formateada = diasSemana[dia_semana] + ',' + dia_mes + ' de ' + meses[mes]    
+    
+    // Si el dia del mes solo tiene un digito, se rellena con 0 por la izquieda. 
+    // slice(-2) => coge los dos últimos caracteres. 
+    let dia_mes = ('0' + fecha.getDate()).slice(-2)
+    let mes = ('0' + fecha.getMonth()).slice(-2)   
+    
+    let fecha_formateada = diasSemana[dia_semana] + '-' + dia_mes + "-" + mes
+    
     return fecha_formateada;
 
 }
@@ -96,6 +103,11 @@ const formatearFechaCompleta = (fecha) => {
 let fechaActual = new Date();
 
 console.log(fechaActual)
+
+console.log('get date = ', fechaActual.getDate())
+// let fecha = fechaActual.getDate().slice(-2)
+// console.log('get date slice = ', ('0' + fechaActual.getDate()).slice(-2));
+//  console.log('get date slice = ', fecha);
 
 obtenerSemana(fechaActual)
 
