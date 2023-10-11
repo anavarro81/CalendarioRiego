@@ -45,18 +45,25 @@ const obtenerSemana= (fecha) => {
     let fechaLunes = obtenerLunes(fecha)
     let fechaDomingo = obtenerDomingo(fecha)
     let semana = []
+
+    console.log('fechaLunes > ', fechaLunes)
+    console.log('fechaDomingo > ', fechaDomingo)
     
 
     let fecha_actual = new Date (fechaLunes)
     
     // Formatea la fecha y la guarda. 
     while (fecha_actual <= fechaDomingo) {        
-        let fechaCompleta = formatearFechaCompleta(fecha_actual)
-        semana.push(fechaCompleta) 
+        console.log('fecha_actual > ', fecha_actual)
+        // let fechaCompleta = formatearFechaCompleta(fecha_actual)
+        // semana.push(fechaCompleta) 
+        // semana.push(fecha_actual)
+        semana.push(new Date(fecha_actual)) 
+        console.log('semana -->', semana)
         fecha_actual.setDate(fecha_actual.getDate() + 1);       
     }
     
-    console.log(semana)
+    // console.log('Semana final:', semana)
 
     return semana
 
@@ -83,11 +90,14 @@ const formatearFechaCompleta = (fecha) => {
 
 
 
-export { obtenerFechaActual, obtenerSemana, formatearFechaCompleta };
+// export { obtenerFechaActual, obtenerSemana, formatearFechaCompleta };
 
 
-// let fechaActual = new Date();
-// obtenerSemana(fechaActual)
+let fechaActual = new Date();
+
+console.log(fechaActual)
+
+obtenerSemana(fechaActual)
 
 
     

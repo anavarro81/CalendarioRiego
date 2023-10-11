@@ -14,14 +14,22 @@ const encabFechas$$ = document.querySelector("#encab-fechas")
 
 const formRiego$$ = document.querySelector("#formRiego")
 
+// const celdaColor$$ = document.querySelector("#'Lunes,9 de Octubre-1'")
+
+
 // Muestra | Oculta el modal para recoger el horario de riego.
 
-let riego = {
-    fecha: "",
-    titulo: "",
-    horaInicio: "",
-    horaFinal: ""
-}
+
+class Riego {
+    constructor(fecha, titulo, horaInicio, horaFinal) {
+      this.fecha = fecha;
+      this.titulo = titulo;
+      this.horaInicio = horaInicio;
+      this.horaFinal = horaFinal;
+    }
+  }
+  
+
 
 let calendarioRiegos = []
 
@@ -41,14 +49,15 @@ const mostrarDatosRiegoInput = (e) => {
 
 const grabarRiego = (e) => {
     e.preventDefault();
-    console.log('Estoy en grabar el riego');
-    console.log(e.target.titulo.value)
-    console.log(e.target.horaInicio.value)
-    console.log(fechaRiego$$.innerHTML)
 
-    riego.titulo = e.target.titulo.value
-    calendarioRiegos.push(riego)
-    console.log(calendarioRiegos)
+    let titulo = e.target.titulo.value
+    let horaInicio = e.target.horaInicio.value
+    let horaFin = e.target.horaFin.value
+    
+    let nuevoRiego = new Riego("", titulo, horaInicio, horaFin)      
+    
+    calendarioRiegos = [...calendarioRiegos,  nuevoRiego]
+    
     
     // Cierra el modal y vuelve al Calendario. 
     closeModal()
@@ -161,3 +170,6 @@ for (const hora of horasDia) {
 }
 
 formRiego$$.addEventListener('submit', grabarRiego)
+
+// celdaColor$$.style.backgroundColor = "red";
+
