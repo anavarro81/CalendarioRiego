@@ -1,4 +1,5 @@
-const celdaColor$$ = document.querySelector("#LUN-09-09-01")
+
+// const celdaColor$$ = document.querySelector("#LUN-09-09-01")
 // Añadir riego
 
 // Modificar Riego 
@@ -20,7 +21,7 @@ const celdaColor$$ = document.querySelector("#LUN-09-09-01")
 //   }
   
 const calendario = [{
-    fecha: '09-09-23', titulo: 'Riego Patatas', horaInicio: '01:00', horaFinal: '04:00'
+    fecha: '16-10-23', titulo: 'Riego Patatas', horaInicio: '01:00', horaFinal: '04:00'
 }]
 
 
@@ -38,9 +39,10 @@ const informarEventos = (calendario) => {
 
         for (let hora = horaInicio; hora <= horaFinal; hora++) {
             
-            let id = "LUN-09-09-" + ('0' + hora).slice(-2)
-            
-            console.log(id)
+            let id = "#LUN-16-10-" + ('0' + hora).slice(-2)
+            console.log('id = ', id)
+            let celdaColor = document.querySelector(id)
+            celdaColor.style.backgroundColor = 'rgb(210,227,252)';
             
         }
                 
@@ -49,5 +51,7 @@ const informarEventos = (calendario) => {
 
 }
 
-informarEventos(calendario)
-celdaColor$$.style.backgroundColor = "red";
+export { informarEventos };
+
+// informarEventos(calendario)
+// celdaColor$$.style.backgroundColor = "red";

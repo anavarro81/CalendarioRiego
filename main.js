@@ -1,4 +1,5 @@
 import { obtenerFechaActual, obtenerSemana } from './modules/fechas.js';
+import {informarEventos} from './modules/calendar.js'
 
 const celdas$$ = document.querySelectorAll("td")
 const modal$$ = document.querySelector("#infoRiego")
@@ -11,8 +12,12 @@ const fechaRiego$$ = document.querySelector("#fechaRiego")
 const tbCalendar$$ = document.querySelector("#tb-calendar")
 const encabFechas$$ = document.querySelector("#encab-fechas")
 
-
 const formRiego$$ = document.querySelector("#formRiego")
+
+const calendario = [{
+    fecha: '16-10-23', titulo: 'Riego Patatas', horaInicio: '01:00', horaFinal: '04:00'
+}]
+
 
 // const celdaColor$$ = document.querySelector("#'Lunes,9 de Octubre-1'")
 
@@ -123,6 +128,8 @@ const generarCabecera = (fechas, posHoy) => {
 
 let fechaActual = obtenerFechaActual()
 
+
+
 let posHoy = fechaActual.getDay()
  
 
@@ -175,6 +182,8 @@ for (const hora of horasDia) {
 }
 
 formRiego$$.addEventListener('submit', grabarRiego)
+informarEventos(calendario)
+
 
 // celdaColor$$.style.backgroundColor = "red";
 

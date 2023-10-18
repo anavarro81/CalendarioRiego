@@ -87,9 +87,13 @@ const formatearFechaCompleta = (fecha) => {
     // Si el dia del mes solo tiene un digito, se rellena con 0 por la izquieda. 
     // slice(-2) => coge los dos últimos caracteres. 
     let dia_mes = ('0' + fecha.getDate()).slice(-2)
-    let mes = ('0' + fecha.getMonth()).slice(-2)   
+    // Se suma 1 porque getMonth devuelve el numero del mes empezando en 0 para enero. 
+    let mes = fecha.getMonth() + 1
+    let mes_string = ('0' + mes).slice(-2)   
+
     
-    let fecha_formateada = diasSemana[dia_semana] + '-' + dia_mes + "-" + mes
+    
+    let fecha_formateada = diasSemana[dia_semana] + '-' + dia_mes + "-" + mes_string
     
     return fecha_formateada;
 
