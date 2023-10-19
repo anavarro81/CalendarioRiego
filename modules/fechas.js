@@ -1,5 +1,5 @@
 
-const diasSemana = ["DOM", "LUN", "MAR", "MIÉ", "JUE", "VIE", "SAB"];
+const diasSemana = ["DOM", "LUN", "MAR", "MIE", "JUE", "VIE", "SAB"];
 const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
 

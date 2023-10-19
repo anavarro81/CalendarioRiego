@@ -28,11 +28,15 @@ th {
 
 }
 
+#encab-fechas {
+text-align: center;   
+ 
+}
 
 th, td {
     border: 1px solid #ddd; /* Borde de 1 píxel y color gris claro */
     padding: 8px; /* Espaciado interno de las celdas */
-    text-align: left; /* Alineación del texto a la izquierda */
+    
     width: 150px; /* Ancho fijo para todas las celdas */
 }
 
