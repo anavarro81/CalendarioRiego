@@ -14,20 +14,21 @@ const encabFechas$$ = document.querySelector("#encab-fechas")
 
 const formRiego$$ = document.querySelector("#formRiego")
 
-let calendario = [
+// let calendario = [
     
-    { fecha: '16-10-2023', titulo: 'Riego Patatas', horaInicio: '01:00', horaFinal: '04:00' }, 
+//     { fecha: '16-10-2023', titulo: 'Riego Patatas', horaInicio: '01:00', horaFinal: '04:00' }, 
 
-    { fecha: '18-10-2023', titulo: 'Riego Tomates', horaInicio: '08:00', horaFinal: '12:00' },
+//     { fecha: '18-10-2023', titulo: 'Riego Tomates', horaInicio: '08:00', horaFinal: '12:00' },
 
-    { fecha: '22-10-2023', titulo: 'Riego Tomates', horaInicio: '16:00', horaFinal: '21:00' },
+//     { fecha: '22-10-2023', titulo: 'Riego Tomates', horaInicio: '16:00', horaFinal: '21:00' },
 
-]
+// ]
 
-
+let calendario = []
 
 class Riego {
-    constructor(fecha, titulo, horaInicio, horaFinal) {
+    constructor(id, fecha, titulo, horaInicio, horaFinal) {
+      this.id = id;
       this.fecha = fecha;
       this.titulo = titulo;
       this.horaInicio = horaInicio;
@@ -45,9 +46,18 @@ const closeModal = () => {
 }
 
 const mostrarDatosRiegoInput = (e) => {
+
+    if(e.currentTarget.hasAttribute('data-id')){
+        // mostramos modal de editar y eliminar con los datos de esa tarea
+        let dataId = e.currentTarget.getAttribute('data-id');
+        console.log('esta celda pertenece a la tarea: ' + dataId);
+    } else {
+        //mostramos el modal que mostrabvamos antes
+        modal$$.style.display = 'flex';
+        fechaRiego$$.innerHTML = e.target.id
+    }
     
-    modal$$.style.display = 'flex';
-    fechaRiego$$.innerHTML = e.target.id
+
      
     
 
@@ -55,6 +65,8 @@ const mostrarDatosRiegoInput = (e) => {
 
 const grabarRiego = (e) => {
     e.preventDefault();
+ 
+
 
     // LUN-09-09
 
@@ -65,11 +77,12 @@ const grabarRiego = (e) => {
 
     console.log(fechaRiego$$.innerHTML)
 
+    let id = generarIdUnico();
     let titulo = e.target.titulo.value
     let horaInicio = e.target.horaInicio.value
     let horaFin = e.target.horaFin.value
     
-    let nuevoRiego = new Riego(fechaRiego, titulo, horaInicio, horaFin)      
+    let nuevoRiego = new Riego(id, fechaRiego, titulo, horaInicio, horaFin)      
     
     calendario = [...calendario,  nuevoRiego]   
 
@@ -81,6 +94,10 @@ const grabarRiego = (e) => {
 
     informarEventos(calendario)
 
+}
+
+function generarIdUnico(){
+    return 'id-'+Date.now()+'-'+Math.round(Math.random()*1000000);
 }
 
 // Genera array con las horas desde 01:00 hasta 23:00
