@@ -1,8 +1,10 @@
 import { obtenerFechaActual, obtenerSemana } from './modules/fechas.js';
 import {informarEventos} from './modules/calendar.js'
 
+const diasSemana = ["domingo", "lunes", "martes", "miercoles", "jueves", "sabado", "domingo"];
+
 const celdas$$ = document.querySelectorAll("td")
-const modal$$ = document.querySelector("#infoRiego")
+const modal$$ = document.querySelector("#nuevoRiego")
 const modalActRiego$$ = document.querySelector('#actualizarRiegoModal')
 
 const mostrarInputRiego$$ = document.querySelector("#mostrarInputRiego")
@@ -49,6 +51,7 @@ const closeModal = () => {
     modal$$.style.display = 'none';
 }
 
+// Ejemplo id: MAR-17-10-03  
 const mostrarDatosRiegoInput = (e) => {
 
     if(e.currentTarget.hasAttribute('data-id')){
@@ -138,14 +141,18 @@ const generarCabecera = (fechas, posHoy) => {
     
     for (let [index, fecha] of fechas.entries()) {
         let encabFecha =  document.createElement('th');         
-        
-        let dia = fecha.substring(4, 6)        
 
-        encabFecha.innerHTML = fecha.substring(0,3).toUpperCase() + "<br>" + dia
+
+        let [diaSemana, diaMes, nMes] = fecha.split('-')       
         
-        if (index == posHoy-1) {
-            encabFecha.classList.add('azul')
+
+        encabFecha.innerHTML = diaSemana.substring(0,3).toUpperCase() + "<br>" + diaMes
+         
+        if (diaSemana == diasSemana[posHoy]) {
+            encabFecha.classList.add('azul')   
         }
+
+
         encabFechas$$.appendChild(encabFecha)  
 
     }

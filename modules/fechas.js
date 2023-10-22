@@ -1,6 +1,6 @@
 
-const diasSemana = ["DOM", "LUN", "MAR", "MIE", "JUE", "VIE", "SAB"];
-const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+const diasSemana = ["domingo", "lunes", "martes", "miercoles", "jueves", "viernes", "sabado"];
+const meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
 
 
 
@@ -99,6 +99,10 @@ const formatearFechaCompleta = (fecha) => {
 
 }
 
+const obtenerDiaSemana = () => {
+    
+}
+
 
 
 export { obtenerFechaActual, obtenerSemana, formatearFechaCompleta };
@@ -117,6 +121,27 @@ obtenerSemana(fechaActual)
 
 
     
+// const diasSemana = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
 
+
+// A partir de una fecha en formato DD-MM-AAAA, obtengo:
+
+// 1.  El dia de la semana: Lunes, Martes, Miercoles, Jueves, Viernes, Sabado, Domingo. 
+// 2.  El mes del año: enero, febrero, marzo... 
+
+const extraerDatosfecha = (fecha) => {
+    let [dia, mes, anyo] = fecha.split('-')
+    fecha = new Date (anyo, mes-1, dia)
+    let dayOfWeek = fecha.getDay()
+    
+    // Devuelve el dia de la semana. 
+    console.log(diasSemana[dayOfWeek])
+
+    // Devuelve el dia dle mes
+    let month = fecha.getMonth()
+    console.log(meses[month])
+}
+
+// extraerDatosfecha('16-10-2023')
 
 
