@@ -14,19 +14,23 @@
         <thead id="encab-fechas">
         </thead>    
 
-        
-    
-
 </table>
 
     <div id="infoRiego" class="modal">
         <div class="modal-content">
             
-            <span class="close" onclick="closeModal()">&times;</span>
             
+            
+            <div class="event-opt"> 
+                <img src="edit.png" alt="editar">
+                <img src="trash-can-back-16.png" alt="borrar">
+                <img src="close-20px.png" id='btn-close-modal' alt="borrar">
+            </div>
+
             <p id="fechaRiego"></p>
             
             <form action="" id="formRiego">
+                
                 <label for="titulo"> Titulo </label>
                 <input type="text" id="titulo">               
                 
@@ -50,6 +54,17 @@
             
             </form>
         </div>
+    </div>
+
+
+    <div id="actualizarRiegoModal" class="modal">
+
+        <div class="event-opt"> 
+            <img src="edit.png" alt="editar">
+            <img src="trash-can-back-16.png" alt="borrar">
+            <img src="close-20px.png" id='btn-close-modal' alt="borrar">
+        </div>
+
     </div>
 
     <script type="module" src="main.js" defer> </script>

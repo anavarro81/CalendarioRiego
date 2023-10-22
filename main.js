@@ -3,6 +3,8 @@ import {informarEventos} from './modules/calendar.js'
 
 const celdas$$ = document.querySelectorAll("td")
 const modal$$ = document.querySelector("#infoRiego")
+const modalActRiego$$ = document.querySelector('#actualizarRiegoModal')
+
 const mostrarInputRiego$$ = document.querySelector("#mostrarInputRiego")
 
 const horaInicio$$ = document.querySelector("#horaInicio")
@@ -13,6 +15,8 @@ const tbCalendar$$ = document.querySelector("#tb-calendar")
 const encabFechas$$ = document.querySelector("#encab-fechas")
 
 const formRiego$$ = document.querySelector("#formRiego")
+
+const cerrarModalBtn = document.querySelector('#btn-close-modal')
 
 // let calendario = [
     
@@ -51,6 +55,7 @@ const mostrarDatosRiegoInput = (e) => {
         // mostramos modal de editar y eliminar con los datos de esa tarea
         let dataId = e.currentTarget.getAttribute('data-id');
         console.log('esta celda pertenece a la tarea: ' + dataId);
+        modalActRiego$$.style.display = 'flex';
     } else {
         //mostramos el modal que mostrabvamos antes
         modal$$.style.display = 'flex';
@@ -75,7 +80,7 @@ const grabarRiego = (e) => {
 
     
 
-    console.log(fechaRiego$$.innerHTML)
+    // console.log(fechaRiego$$.innerHTML)
 
     let id = generarIdUnico();
     let titulo = e.target.titulo.value
@@ -211,7 +216,7 @@ informarHorasSelect()
 
 
 formRiego$$.addEventListener('submit', grabarRiego)
-
+cerrarModalBtn.addEventListener('click', closeModal)
 
 informarEventos(calendario)
 

@@ -87,6 +87,17 @@ td.no-expand {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+#btn-close-modal {
+    cursor: pointer;
+
+}
+.event-opt {
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+    
+}
+
 .azul {
     color: blue;
 }
