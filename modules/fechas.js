@@ -40,28 +40,44 @@ const obtenerDomingo = (fecha) => {
 
 // Obtiene la semana en formato:
 // dia de la semana x(3) + dia. Ejemplo: "LUN 25", "MAR 26", "MIÉ 27"...
-const obtenerSemana= (fecha) => {
+// Puede devolver la semana en dos formatos:
+   // 1.  semana => Lunes-16-10
+   // 2.  semanaLiteral => Lunes 16 de octubre
+  
+const obtenerSemana= (fecha, formato) => {
 
     let fechaLunes = obtenerLunes(fecha)
     let fechaDomingo = obtenerDomingo(fecha)
-    let semana = []
-
-    console.log('fechaLunes > ', fechaLunes)
-    console.log('fechaDomingo > ', fechaDomingo)
-    
+    let semana = []   
 
     let fecha_actual = new Date (fechaLunes)
-    
-    // Formatea la fecha y la guarda. 
-    while (fecha_actual <= fechaDomingo) {        
-        let fecha_formateada = formatearFechaCompleta(fecha_actual)
-        semana.push(fecha_formateada)
-        fecha_actual.setDate(fecha_actual.getDate() + 1);       
-    }
-    
-    console.log('Semana final:', semana)
 
+    // Formato = Lunes-16-10
+    if (formato == 1) {
+    
+        // Formatea la fecha y la guarda. 
+        while (fecha_actual <= fechaDomingo) {        
+            let fecha_formateada = formatearFechaCompleta(fecha_actual)
+            semana.push(fecha_formateada)
+            fecha_actual.setDate(fecha_actual.getDate() + 1);       
+        }
     return semana
+    }
+    // Lunes 16 de octubre
+    if (formato == 2) {
+    
+        // Formatea la fecha y la guarda. 
+        while (fecha_actual <= fechaDomingo) {                    
+            let fechaLit = `${diasSemana[fecha_actual.getDay()]}, ${fecha_actual.getDate()} de ${meses[fecha_actual.getMonth()]}`
+            semana.push(fechaLit)
+            fecha_actual.setDate(fecha_actual.getDate() + 1);       
+        }
+        return semana
+    }
+
+
+
+    
 
 }    
 
@@ -103,29 +119,7 @@ const obtenerDiaSemana = () => {
     
 }
 
-
-
-export { obtenerFechaActual, obtenerSemana, formatearFechaCompleta };
-
-
-let fechaActual = new Date();
-
-console.log(fechaActual)
-
-console.log('get date = ', fechaActual.getDate())
-// let fecha = fechaActual.getDate().slice(-2)
-// console.log('get date slice = ', ('0' + fechaActual.getDate()).slice(-2));
-//  console.log('get date slice = ', fecha);
-
-obtenerSemana(fechaActual)
-
-
-    
-// const diasSemana = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
-
-
 // A partir de una fecha en formato DD-MM-AAAA, obtengo:
-
 // 1.  El dia de la semana: Lunes, Martes, Miercoles, Jueves, Viernes, Sabado, Domingo. 
 // 2.  El mes del año: enero, febrero, marzo... 
 
@@ -142,6 +136,11 @@ const extraerDatosfecha = (fecha) => {
     console.log(meses[month])
 }
 
-// extraerDatosfecha('16-10-2023')
 
+
+// let fechaActual = new Date();
+// obtenerSemana(fechaActual)
+
+export { obtenerFechaActual, obtenerSemana, formatearFechaCompleta, extraerDatosfecha };
+    
 

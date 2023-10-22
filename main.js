@@ -5,6 +5,8 @@ const diasSemana = ["domingo", "lunes", "martes", "miercoles", "jueves", "sabado
 
 const celdas$$ = document.querySelectorAll("td")
 const modal$$ = document.querySelector("#nuevoRiego")
+const fechasRiego$$ = document.querySelector("#fechaRiego")
+
 const modalActRiego$$ = document.querySelector('#actualizarRiegoModal')
 
 const mostrarInputRiego$$ = document.querySelector("#mostrarInputRiego")
@@ -12,7 +14,12 @@ const mostrarInputRiego$$ = document.querySelector("#mostrarInputRiego")
 const horaInicio$$ = document.querySelector("#horaInicio")
 const horaFin$$ = document.querySelector("#horaFin")
 
+
+
 const fechaRiego$$ = document.querySelector("#fechaRiego")
+const fechaRiegoSelect$$ = document.querySelector("#fechaRiegoSelect")
+
+
 const tbCalendar$$ = document.querySelector("#tb-calendar")
 const encabFechas$$ = document.querySelector("#encab-fechas")
 
@@ -60,8 +67,10 @@ const mostrarDatosRiegoInput = (e) => {
         console.log('esta celda pertenece a la tarea: ' + dataId);
         modalActRiego$$.style.display = 'flex';
     } else {
-        //mostramos el modal que mostrabvamos antes
+        // Modal: Nuevo Riego
         modal$$.style.display = 'flex';
+        
+        
         fechaRiego$$.innerHTML = e.target.id
     }
     
@@ -189,7 +198,9 @@ let posHoy = fechaActual.getDay()
  
 
 // Obtiene un array con las fechs de la semana de lunes a domigo, en formato: "NNN 00". 
-let fechas = obtenerSemana(fechaActual)
+let fechas = obtenerSemana(fechaActual, 1)
+let fechasLit = obtenerSemana(fechaActual, 2)
+
 generarCabecera(fechas, posHoy)
 
 // Obtenems las horas del dia de 01:00 a 23:00
@@ -221,6 +232,24 @@ const informarHorasSelect = () => {
 // Informa las horas 01:00 -> 23:00 para los campos SELECT. 
 informarHorasSelect()
 
+// Informa las fechas de riego para el formulario. 
+
+const informarSelectFechas = () => {
+
+    for (let fecha of fechasLit) {
+        let fechaRiego = document.createElement("option")
+        fechaRiego.value = fecha
+        fechaRiego.text = fecha
+
+        fechaRiegoSelect$$.appendChild(fechaRiego)
+    }
+
+    
+
+
+}
+
+informarSelectFechas()
 
 formRiego$$.addEventListener('submit', grabarRiego)
 cerrarModalBtn.addEventListener('click', closeModal)
