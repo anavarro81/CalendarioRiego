@@ -3,22 +3,16 @@ import {informarEventos} from './modules/calendar.js'
 
 const diasSemana = ["domingo", "lunes", "martes", "miercoles", "jueves", "sabado", "domingo"];
 
-const celdas$$ = document.querySelectorAll("td")
-const modal$$ = document.querySelector("#nuevoRiego")
-const fechasRiego$$ = document.querySelector("#fechaRiego")
 
+const modal$$ = document.querySelector("#nuevoRiego")
 const modalActRiego$$ = document.querySelector('#actualizarRiegoModal')
 
-const mostrarInputRiego$$ = document.querySelector("#mostrarInputRiego")
 
 const horaInicio$$ = document.querySelector("#horaInicio")
 const horaFin$$ = document.querySelector("#horaFin")
 
-
-
 const fechaRiego$$ = document.querySelector("#fechaRiego")
 const fechaRiegoSelect$$ = document.querySelector("#fechaRiegoSelect")
-
 
 const tbCalendar$$ = document.querySelector("#tb-calendar")
 const encabFechas$$ = document.querySelector("#encab-fechas")
@@ -27,15 +21,6 @@ const formRiego$$ = document.querySelector("#formRiego")
 
 const cerrarModalBtn = document.querySelector('#btn-close-modal')
 
-// let calendario = [
-    
-//     { fecha: '16-10-2023', titulo: 'Riego Patatas', horaInicio: '01:00', horaFinal: '04:00' }, 
-
-//     { fecha: '18-10-2023', titulo: 'Riego Tomates', horaInicio: '08:00', horaFinal: '12:00' },
-
-//     { fecha: '22-10-2023', titulo: 'Riego Tomates', horaInicio: '16:00', horaFinal: '21:00' },
-
-// ]
 
 let calendario = []
 
@@ -70,7 +55,27 @@ const mostrarDatosRiegoInput = (e) => {
         // Modal: Nuevo Riego
         modal$$.style.display = 'flex';
         
+        //martes-17-10-03
+
+        const [diaSemana, diaMes, mes, horaInicio] = e.target.id.split('-')
+
+        let numOpciones = fechaRiegoSelect$$.options.length
+
+        for (let ind=0; ind <numOpciones; ind++) {
+            
+            let fechaSelecionada = fechaRiegoSelect$$.options[ind].value
+
+            if (fechaSelecionada.includes(diaSemana)) {
+
+                let fechaDefecto = fechaRiegoSelect$$.querySelector(`option[value="${fechaSelecionada}"]`);
+                fechaDefecto.selected = true;
+
+            }
+            
+
+        }
         
+
         fechaRiego$$.innerHTML = e.target.id
     }
     
