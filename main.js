@@ -2,6 +2,7 @@ import { obtenerFechaActual, obtenerSemana } from './modules/fechas.js';
 import {informarEventos} from './modules/calendar.js'
 
 const diasSemana = ["domingo", "lunes", "martes", "miercoles", "jueves", "sabado", "domingo"];
+const meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
 
 
 const modal$$ = document.querySelector("#nuevoRiego")
@@ -20,6 +21,18 @@ const encabFechas$$ = document.querySelector("#encab-fechas")
 const formRiego$$ = document.querySelector("#formRiego")
 
 const cerrarModalBtn = document.querySelector('#btn-close-modal')
+const cerrarModalModifBtn = document.querySelector('#btn-close-modalModif')
+
+
+// Modal Modif-Borrado. 
+// Encabezado. Riego. 
+const titModModif$$ = document.querySelector('#tit-mod-modif')
+
+const infoRiegoSelect$$ = document.querySelector('#info-riego-select')
+
+
+//
+
 
 
 let calendario = []
@@ -43,6 +56,10 @@ const closeModal = () => {
     modal$$.style.display = 'none';
 }
 
+const closeModalModif = () => {
+    modalActRiego$$.style.display = 'none'
+}
+
 // Ejemplo id: MAR-17-10-03  
 const mostrarDatosRiegoInput = (e) => {
 
@@ -55,8 +72,8 @@ const mostrarDatosRiegoInput = (e) => {
         // Modal: Nuevo Riego
         modal$$.style.display = 'flex';
         
-        //martes-17-10-03
-
+        
+        // Activa por defecto el dia de la celda seleccionada en el campo SELECT.   
         const [diaSemana, diaMes, mes, horaInicio] = e.target.id.split('-')
 
         let numOpciones = fechaRiegoSelect$$.options.length
@@ -74,7 +91,13 @@ const mostrarDatosRiegoInput = (e) => {
             
 
         }
+        let horaFin = parseInt(horaInicio) + 1   
+            horaFin = horaFin.toString().padStart(2, '0') + ":00"
         
+        let hora = horaInicio.toString() + ":00"
+
+        
+        infoRiegoSelect$$.innerHTML = `${diaSemana}, ${diaMes} de  ${meses[mes-1]} | ${hora}  &#8212  ${horaFin}`
 
         fechaRiego$$.innerHTML = e.target.id
     }
@@ -90,10 +113,11 @@ const grabarRiego = (e) => {
  
 
 
-    // LUN-09-09
+    // lunes-23-10-01
 
-    let diaMes = fechaRiego$$.innerHTML.substring(4,9)
-    let fechaRiego = diaMes + '-' + year
+    let [diaSemana, diaMes, mes, horaIni] = fechaRiego$$.innerHTML.split('-')
+    
+    let fechaRiego = diaMes + '-' + mes + '-' + year
 
     
 
@@ -258,6 +282,8 @@ informarSelectFechas()
 
 formRiego$$.addEventListener('submit', grabarRiego)
 cerrarModalBtn.addEventListener('click', closeModal)
+cerrarModalModifBtn.addEventListener('click', closeModalModif)   
+
 
 informarEventos(calendario)
 

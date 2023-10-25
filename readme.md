@@ -15,10 +15,29 @@
 * Ejemplo de registros ´{ fecha: '16-10-2023', titulo: 'Riego Patatas', horaInicio: '01:00', horaFinal: '04:00' }, ´
 
 
-# Planificar riego. 
+# Planificar nuevo riego. 
 
 1. El usuario hace clic en una celda, se abre el modal. [mostrarDatosRiegoInput]
-2. Se rellena los datos: titulo (ej: riego de patatas), la hora de inicio y la hora de final.
+2. Se compruba si tiene o no el atributo 'data-id'
+   Si no lo tiene (nuevo riego)
+   1. Extraemos del id de [e.target.id] la celda seleccionada la siguiente información:
+      * diaSemana, 
+      * diaMes
+      * mes
+      * horaInicio
+    2. Activamos por defecto en el SELECT de fecha, la fecha del dia actual. 
+       * Se recorren las opciones del campo SELECT hasta enontrar la que concicia con el dia de la semana. ``` fechaSelecionada.includes(diaSemana) ``` 
+       * Se activa la propiedad **selected** para esta opción. 
+    
+    Al pular en el botón 'Regar', se llama a: [grabarRiego]
+
+
+
+      
+
+
+
+Se rellena los datos: titulo (ej: riego de patatas), la hora de inicio y la hora de final.
 3. Se pulsa en guardar
 *   Se cierra el modal -> closeModal. 
 *   Se graba el riego -> grabarRiego
