@@ -28,6 +28,8 @@ const cerrarModalModifBtn = document.querySelector('#btn-close-modalModif')
 // Encabezado. Riego. 
 const titModModif$$ = document.querySelector('#tit-mod-modif')
 
+const borrarRiegoBtn$$ = document.querySelector('#borrarRiego')
+
 const infoRiegoSelect$$ = document.querySelector('#info-riego-select')
 
 
@@ -60,14 +62,52 @@ const closeModalModif = () => {
     modalActRiego$$.style.display = 'none'
 }
 
+
+
+//Borrar riego. 
+// 1. Elimina el objeto Riego asociado en la arraya calendario por id
+// 2. Elimina el color del fondo de las celdas correspondientes en el calendario
+
+const borrarRiego = (e) => {
+
+    console.log('Estoy en borrar riego...')
+    
+    // Obtengo el id del riego a borrar. 
+    let dataId = e.currentTarget.getAttribute('data-id')
+
+    // seleccionado las celdas a borrar. 
+    let celdasRiego = document.querySelectorAll(`td[data-id="${dataId}"]`)
+
+    for (const celdaRiego of celdasRiego) {
+        celdaRiego.style.backgroundColor = "transparent";
+    }
+
+}
+
 // Ejemplo id: MAR-17-10-03  
 const mostrarDatosRiegoInput = (e) => {
 
     if(e.currentTarget.hasAttribute('data-id')){
         // mostramos modal de editar y eliminar con los datos de esa tarea
         let dataId = e.currentTarget.getAttribute('data-id');
+        
+        // celdaColor.setAttribute('data-id', unicoId);
+        
         console.log('esta celda pertenece a la tarea: ' + dataId);
         modalActRiego$$.style.display = 'flex';
+        borrarRiegoBtn$$.setAttribute('data-id', dataId)
+        
+        // Seleccionamos todas las celdas de la tabla, que tengan el atributo data-id con el valor del id inicado. 
+        // Cada objeto Riego tiene un id único. 
+        
+
+        console.log('Celdas Riego', celdasRiego)
+        borrarRiegoBtn$$.id = dataId
+
+
+
+
+
     } else {
         // Modal: Nuevo Riego
         modal$$.style.display = 'flex';
@@ -283,10 +323,10 @@ informarSelectFechas()
 formRiego$$.addEventListener('submit', grabarRiego)
 cerrarModalBtn.addEventListener('click', closeModal)
 cerrarModalModifBtn.addEventListener('click', closeModalModif)   
-
+borrarRiegoBtn$$.addEventListener('click', borrarRiego)
 
 informarEventos(calendario)
 
 
-// celdaColor$$.style.backgroundColor = "red";
+
 
