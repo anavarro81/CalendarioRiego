@@ -31,7 +31,7 @@ const titModModif$$ = document.querySelector('#tit-mod-modif')
 const borrarRiegoBtn$$ = document.querySelector('#borrarRiego')
 
 const infoRiegoSelect$$ = document.querySelector('#info-riego-select')
-
+const editarRiegoBtn$$ = document.querySelector('#editarRiego')
 
 //
 
@@ -84,6 +84,18 @@ const borrarRiego = (e) => {
 
 }
 
+const editarRiego = (e) => {
+    
+    console.log('He pulsado editar riego... ')
+    
+    // Obtengo el id del riego a modificar.
+    let dataId = e.currentTarget.getAttribute('data-id')
+    console.log('Voy a editar el riego con id = ',  dataId)
+
+
+
+}
+
 // Ejemplo id: MAR-17-10-03  
 const mostrarDatosRiegoInput = (e) => {
 
@@ -95,7 +107,13 @@ const mostrarDatosRiegoInput = (e) => {
         
         console.log('esta celda pertenece a la tarea: ' + dataId);
         modalActRiego$$.style.display = 'flex';
+
+        // Asigo el atributo data-id al boton del modal con el valor del id seleccinado para borrarlo si se hace click. 
         borrarRiegoBtn$$.setAttribute('data-id', dataId)
+        editarRiegoBtn$$.setAttribute('data-id', dataId)
+
+
+        titModModif$$.innerHTML = "Soy Juanito"
         
         // Seleccionamos todas las celdas de la tabla, que tengan el atributo data-id con el valor del id inicado. 
         // Cada objeto Riego tiene un id único. 
@@ -164,7 +182,15 @@ const grabarRiego = (e) => {
     // console.log(fechaRiego$$.innerHTML)
 
     let id = generarIdUnico();
-    let titulo = e.target.titulo.value
+    let titulo = "" 
+
+    // Si no se informa el cultivo a regar, se informa con un texto por defecto. 
+    if (e.target.titulo.value == ""){
+        titulo = '(Sin riego definido)'
+    } else {
+        titulo = e.target.titulo.value
+    }
+
     let horaInicio = e.target.horaInicio.value
     let horaFin = e.target.horaFin.value
     
@@ -324,7 +350,7 @@ formRiego$$.addEventListener('submit', grabarRiego)
 cerrarModalBtn.addEventListener('click', closeModal)
 cerrarModalModifBtn.addEventListener('click', closeModalModif)   
 borrarRiegoBtn$$.addEventListener('click', borrarRiego)
-
+editarRiegoBtn$$.addEventListener('click', editarRiego)
 informarEventos(calendario)
 
 

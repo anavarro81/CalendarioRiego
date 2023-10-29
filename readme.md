@@ -33,7 +33,18 @@
 
 
 
-      
+![Alt text](image.png)
+
+1. Editar el riego 
+
+  * id = editarRiego
+
+2. Borrar el riego
+
+  * id = borrarRiego
+
+3. Cerrar modal Modif-Borrar. 
+
 
 
 
