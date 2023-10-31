@@ -102,3 +102,7 @@ td.no-expand {
 .azul {
     color: blue;
 }
+
+ #datosRiegoModif {
+    display: none;
+}  

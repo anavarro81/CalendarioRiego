@@ -57,7 +57,7 @@
         </div>
     </div>
 
-<!-- Modal: Actualiza/borra riego -->
+<!-- Modal: Actualiza/borraR riego -->
     <div id="actualizarRiegoModal" class="modal">
 
         <div class="modal-content" >
@@ -71,6 +71,45 @@
                 <h2 id="tit-mod-modif">  </h2>
         
                 <p id="info-riego-select">  </p>
+
+
+                <div id="datosRiegoModif">
+                    
+                    <!-- Fecha de riego -->
+                    <div>
+                        <label for="fecha">  </label>
+                        <select name="fecha" id="fechaRiegoModif">                         
+                        </select>
+                    </div>
+                    
+                    <!-- Hora inicio de inicio -->
+                    <div>                
+                        <label for="horaInicio"> Inicio de Riego: </label>
+                        <select name="horaInicio" id="horaInicioModif"> 
+                            <!-- horas generas con javascript-->
+                        </select>        
+                    </div>
+                    
+                    <!-- Hora fin de inicio -->
+                    <div>
+                        <label for="horaFin"> Fin de Riego: </label>
+                        <select name="horaFin" id="horaFinModif"> 
+                            <!-- horas generas con javascript-->
+                        </select>        
+                    </div>
+
+                    <div>
+                        <button id="actRiego">   Actualizar </button>
+                        <button id="CancelarAct"> Cancelar </button>
+                    </div>
+
+                </div>
+            
+            
+
+                </div>
+
+
         
         </div>        
     </div>

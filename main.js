@@ -14,6 +14,7 @@ const horaFin$$ = document.querySelector("#horaFin")
 
 const fechaRiego$$ = document.querySelector("#fechaRiego")
 const fechaRiegoSelect$$ = document.querySelector("#fechaRiegoSelect")
+const fechaRiegoModif$$ = document.querySelector("#fechaRiegoModif")
 
 const tbCalendar$$ = document.querySelector("#tb-calendar")
 const encabFechas$$ = document.querySelector("#encab-fechas")
@@ -33,6 +34,11 @@ const borrarRiegoBtn$$ = document.querySelector('#borrarRiego')
 const infoRiegoSelect$$ = document.querySelector('#info-riego-select')
 const editarRiegoBtn$$ = document.querySelector('#editarRiego')
 
+const datosRiegoModif$$ = document.querySelector('#datosRiegoModif')
+
+const horaFinModif$$ = document.querySelector('#horaFinModif')
+const horaInicioModif$$ = document.querySelector('#horaInicioModif') 
+const actRiegoBtn$$ = document.querySelector('#actRiego') 
 //
 
 
@@ -49,7 +55,43 @@ class Riego {
     }
   }
   
-  
+  const editarRiego = (e) => {
+    
+    console.log('He pulsado editar riego... ')
+    
+    // Obtengo el id del riego a modificar.
+    let dataId = e.currentTarget.getAttribute('data-id')
+    console.log('Voy a editar el riego con id = ',  dataId)
+
+    infoRiegoSelect$$.style.display = 'none';
+    datosRiegoModif$$.style.display = 'block';
+
+    // Cargamos las fechas en el campo SELECT. 
+    informarFechasModif()
+
+    // Cargamos las horas INICIO en el campo SELECT
+    informarHorasSelect(horaInicioModif$$, horaFinModif$$)
+    
+    actualizarRiego(dataId)
+    
+    // Cargamos las horas FIN en el campo SELECT
+
+
+
+}
+
+const actualizarRiego = (idRiego) => {
+    
+   
+    const indexRiego = calendario.findIndex(riego => riego.id === idRiego);
+
+    if (indexRiego !== -1) {
+        console.log('He encontrado el id de Riego = ', idRiego)
+        console.log('Esta en la posición: ', indexRiego)
+    } else {
+        console.log('No he encontrado el id de Riego = ', idRiego)
+    }
+}  
 
 
 
@@ -84,17 +126,6 @@ const borrarRiego = (e) => {
 
 }
 
-const editarRiego = (e) => {
-    
-    console.log('He pulsado editar riego... ')
-    
-    // Obtengo el id del riego a modificar.
-    let dataId = e.currentTarget.getAttribute('data-id')
-    console.log('Voy a editar el riego con id = ',  dataId)
-
-
-
-}
 
 // Ejemplo id: MAR-17-10-03  
 const mostrarDatosRiegoInput = (e) => {
@@ -113,7 +144,7 @@ const mostrarDatosRiegoInput = (e) => {
         editarRiegoBtn$$.setAttribute('data-id', dataId)
 
 
-        titModModif$$.innerHTML = "Soy Juanito"
+        titModModif$$.innerHTML = "Lechugas"
         
         // Seleccionamos todas las celdas de la tabla, que tengan el atributo data-id con el valor del id inicado. 
         // Cada objeto Riego tiene un id único. 
@@ -306,7 +337,7 @@ generarCabecera(fechas, posHoy)
 
 // Rellenamos los campos SELECT horaInicio y horaFin con las horas desde 01:00 a 23:00h
 
-const informarHorasSelect = () => {
+const informarHorasSelect = (hInicio, hFin) => {
 
     for (const hora of horasDia) {
     
@@ -318,14 +349,14 @@ const informarHorasSelect = () => {
         HourOptFin.value = hora
         HourOptFin.text = hora
         
-        horaInicio$$.appendChild(HourOptIni)
-        horaFin$$.appendChild(HourOptFin)
+        hInicio.appendChild(HourOptIni)
+        hFin.appendChild(HourOptFin)
     }
 
 }
 
 // Informa las horas 01:00 -> 23:00 para los campos SELECT. 
-informarHorasSelect()
+informarHorasSelect(horaInicio$$, horaFin$$)
 
 // Informa las fechas de riego para el formulario. 
 
@@ -337,9 +368,21 @@ const informarSelectFechas = () => {
         fechaRiego.text = fecha
 
         fechaRiegoSelect$$.appendChild(fechaRiego)
-    }
+        
+    }   
 
-    
+}
+
+const informarFechasModif = () => {
+
+    for (let fecha of fechasLit) {
+        let fechaRiego = document.createElement("option")
+        fechaRiego.value = fecha
+        fechaRiego.text = fecha
+
+        fechaRiegoModif$$.appendChild(fechaRiego)
+        
+    }   
 
 
 }
@@ -351,6 +394,7 @@ cerrarModalBtn.addEventListener('click', closeModal)
 cerrarModalModifBtn.addEventListener('click', closeModalModif)   
 borrarRiegoBtn$$.addEventListener('click', borrarRiego)
 editarRiegoBtn$$.addEventListener('click', editarRiego)
+
 informarEventos(calendario)
 
 
