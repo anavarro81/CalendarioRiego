@@ -82,16 +82,31 @@ class Riego {
 
 const actualizarRiego = (idRiego) => {
     
-   
+    // Busca por id el riego a actualizar. 
     const indexRiego = calendario.findIndex(riego => riego.id === idRiego);
 
     if (indexRiego !== -1) {
         console.log('He encontrado el id de Riego = ', idRiego)
         console.log('Esta en la posición: ', indexRiego)
+        // arrayDeObjetos[indiceObjetoAModificar].nombre =
     } else {
         console.log('No he encontrado el id de Riego = ', idRiego)
     }
 }  
+
+
+const actRiego = (e) => {
+
+    console.log('Estoy en actalizar riego');    
+    // Obtengo el id del riego a actualizar 
+    
+    let idRiego = editarRiegoBtn$$.getAttribute('data-id')
+    
+    // Obtener los valores intoducidos. 
+    fechaRiegoModif$$.value
+
+
+}
 
 
 
@@ -394,6 +409,7 @@ cerrarModalBtn.addEventListener('click', closeModal)
 cerrarModalModifBtn.addEventListener('click', closeModalModif)   
 borrarRiegoBtn$$.addEventListener('click', borrarRiego)
 editarRiegoBtn$$.addEventListener('click', editarRiego)
+actRiegoBtn$$.addEventListener('click', actRiego)
 
 informarEventos(calendario)
 
