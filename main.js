@@ -40,8 +40,20 @@ const datosRiegoModif$$ = document.querySelector('#datosRiegoModif')
 
 const horaFinModif$$ = document.querySelector('#horaFinModif')
 const horaInicioModif$$ = document.querySelector('#horaInicioModif') 
-const actRiegoBtn$$ = document.querySelector('#actRiego') 
+const actRiegoModal$$ = document.querySelector('#Actualizar-Riego') 
+
 //
+
+// ------------------------------------------------------------------------- //
+// Actualizar-Riego
+// ----------------
+
+// Muestra los datos a editar del riego. 
+
+// Act-Riego-Content 
+const actRiegoBtn$$ = document.querySelector('#actRiego')   
+
+
 
 
 
@@ -57,22 +69,19 @@ class Riego {
     }
   }
   
-  const editarRiego = (e) => {
+  const editarRiego = (e) => {   
     
-    console.log('He pulsado editar riego... ')
     
     // Obtengo el id del riego a modificar.
     let dataId = e.currentTarget.getAttribute('data-id')
-    console.log('Voy a editar el riego con id = ',  dataId)
-
-    infoRiegoSelect$$.style.display = 'none';
-    datosRiegoModif$$.style.display = 'block';
-
-    // Agrega un campo input al principio para recoger el titulo si se modifica. 
-    let tituloRiegoInput =  document.createElement('input');
-    tituloRiegoInput.placeholder = titModModif$$.innerHTML     
-    datosRiegoModif$$.insertBefore(tituloRiegoInput, datosRiegoModif$$.firstChild)
-
+    
+    // Oculto el modal actual 
+    modalinfoRiego$$.style.display = 'none';
+    
+    // Muestro nuevo modal para editar el riego. 
+    actRiegoModal$$.style.display = 'flex';   
+    
+    
     // Cargamos las fechas en el campo SELECT. 
     informarFechasModif()
 
