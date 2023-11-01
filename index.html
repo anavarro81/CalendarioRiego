@@ -58,7 +58,7 @@
     </div>
 
 <!-- Modal: Actualiza/borrar riego -->
-    <div id="actualizarRiegoModal" class="modal">
+    <div id="Mostrar-Info-Riego" class="modal">
 
         <div class="modal-content" >
 
@@ -68,51 +68,37 @@
                 <img src="close-20px.png" id='btn-close-modalModif' alt="cerrar">
             </div>
 
-                <h2 id="tit-mod-modif">  </h2>
-        
-                <p id="info-riego-select">  </p>
-
-
-                <div id="datosRiegoModif">
-                    
-                    <!-- Fecha de riego -->
-                    <div>
-                        <label for="fecha">  </label>
-                        <select name="fecha" id="fechaRiegoModif">                         
-                        </select>
-                    </div>
-                    
-                    <!-- Hora inicio de inicio -->
-                    <div>                
-                        <label for="horaInicio"> Inicio de Riego: </label>
-                        <select name="horaInicio" id="horaInicioModif"> 
-                            <!-- horas generas con javascript-->
-                        </select>        
-                    </div>
-                    
-                    <!-- Hora fin de inicio -->
-                    <div>
-                        <label for="horaFin"> Fin de Riego: </label>
-                        <select name="horaFin" id="horaFinModif"> 
-                            <!-- horas generas con javascript-->
-                        </select>        
-                    </div>
-
-                    <div>
-                        <button id="actRiego">   Actualizar </button>
-                        <button id="CancelarAct"> Cancelar </button>
-                    </div>
-
-                </div>
-            
-            
-
-                </div>
-
-
-        
+             
+            <div id="info-riego-no-modif" class="infoRiegoNoModif"> 
+                    <h2 id="tit-mod-modif">  </h2>
+                    <p id="info-riego-select">  </p>
+            </div>
         </div>        
     </div>
+
+<!-- Modal: Actualizar Riego -->
+
+<div id="Actualizar-Riego" class="modal">
+
+    <div class="modal-content" >
+
+        <div>
+        <!-- boton cerrar modal, vuelve al Calendario -->
+            <img src="close-20px.png" id='#' alt="cerrar">  
+        </div>
+    
+    <!-- input -->
+
+    <!-- Fecha de inicio -->
+    <!-- hora inicio -->
+    <!-- hora fin -->
+    <!-- Boton -->
+
+    </div>
+
+
+</div>
+
 
     <script type="module" src="main.js" defer> </script>
     <script type="module" src="modules/calendar.js" defer> </script>

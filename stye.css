@@ -106,3 +106,16 @@ td.no-expand {
  #datosRiegoModif {
     display: none;
 }  
+
+.datosRiego {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.infoRiegoNoModif {
+    display: flex;
+    flex-direction: column;
+}
+

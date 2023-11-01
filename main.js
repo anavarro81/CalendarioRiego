@@ -6,7 +6,7 @@ const meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "
 
 
 const modal$$ = document.querySelector("#nuevoRiego")
-const modalActRiego$$ = document.querySelector('#actualizarRiegoModal')
+const modalinfoRiego$$ = document.querySelector('#Mostrar-Info-Riego')
 
 
 const horaInicio$$ = document.querySelector("#horaInicio")
@@ -14,7 +14,6 @@ const horaFin$$ = document.querySelector("#horaFin")
 
 const fechaRiego$$ = document.querySelector("#fechaRiego")
 const fechaRiegoSelect$$ = document.querySelector("#fechaRiegoSelect")
-const fechaRiegoModif$$ = document.querySelector("#fechaRiegoModif")
 
 const tbCalendar$$ = document.querySelector("#tb-calendar")
 const encabFechas$$ = document.querySelector("#encab-fechas")
@@ -27,12 +26,15 @@ const cerrarModalModifBtn = document.querySelector('#btn-close-modalModif')
 
 // Modal Modif-Borrado. 
 // Encabezado. Riego. 
+
+const infoRiegoModif = document.querySelector('#info-riego-no-modif')
 const titModModif$$ = document.querySelector('#tit-mod-modif')
 
 const borrarRiegoBtn$$ = document.querySelector('#borrarRiego')
 
 const infoRiegoSelect$$ = document.querySelector('#info-riego-select')
 const editarRiegoBtn$$ = document.querySelector('#editarRiego')
+const fechaRiegoModif$$ = document.querySelector("#fechaRiegoModif")
 
 const datosRiegoModif$$ = document.querySelector('#datosRiegoModif')
 
@@ -65,6 +67,11 @@ class Riego {
 
     infoRiegoSelect$$.style.display = 'none';
     datosRiegoModif$$.style.display = 'block';
+
+    // Agrega un campo input al principio para recoger el titulo si se modifica. 
+    let tituloRiegoInput =  document.createElement('input');
+    tituloRiegoInput.placeholder = titModModif$$.innerHTML     
+    datosRiegoModif$$.insertBefore(tituloRiegoInput, datosRiegoModif$$.firstChild)
 
     // Cargamos las fechas en el campo SELECT. 
     informarFechasModif()
@@ -103,7 +110,8 @@ const actRiego = (e) => {
     let idRiego = editarRiegoBtn$$.getAttribute('data-id')
     
     // Obtener los valores intoducidos. 
-    fechaRiegoModif$$.value
+    fecha = fechaRiegoModif$$.value
+
 
 
 }
@@ -116,28 +124,41 @@ const closeModal = () => {
 }
 
 const closeModalModif = () => {
-    modalActRiego$$.style.display = 'none'
+    modalinfoRiego$$.style.display = 'none'
 }
 
 
 
 //Borrar riego. 
-// 1. Elimina el objeto Riego asociado en la arraya calendario por id
+// 1. Elimina el objeto Riego asociado en la array calendario por id
 // 2. Elimina el color del fondo de las celdas correspondientes en el calendario
 
-const borrarRiego = (e) => {
-
-    console.log('Estoy en borrar riego...')
+const borrarRiego = (e) => {   
     
+    
+    
+
     // Obtengo el id del riego a borrar. 
     let dataId = e.currentTarget.getAttribute('data-id')
 
-    // seleccionado las celdas a borrar. 
-    let celdasRiego = document.querySelectorAll(`td[data-id="${dataId}"]`)
+    // Borra del array de riegos el riego por id. Se usa el metodo filter para seleccionar los que no tengan ese id. 
+    const calendarioFiltrado = calendario.filter(riego => riego.id !== dataId);
+    calendario =  calendarioFiltrado
+    
 
+    // seleccionado las celdas a borrar con el data-id = id a borrar. 
+    let celdasRiego = document.querySelectorAll(`td[data-id="${dataId}"]`)
+    
+    // Elimina los textos de las todas las celdas.       
+    // Cambiar el color de fondo a trasparente de las celdas. 
+    // Se elimina el atributo data-id de las celdas. 
     for (const celdaRiego of celdasRiego) {
+        celdaRiego.innerHTML = ""
         celdaRiego.style.backgroundColor = "transparent";
+        celdaRiego.removeAttribute('data-id')
     }
+
+    closeModalModif()
 
 }
 
@@ -152,15 +173,14 @@ const mostrarDatosRiegoInput = (e) => {
         // celdaColor.setAttribute('data-id', unicoId);
         
         console.log('esta celda pertenece a la tarea: ' + dataId);
-        modalActRiego$$.style.display = 'flex';
+        modalinfoRiego$$.style.display = 'flex';
+        infoRiegoModif.style.display = 'flex';
+        datosRiegoModif$$.style.display = 'none';
 
         // Asigo el atributo data-id al boton del modal con el valor del id seleccinado para borrarlo si se hace click. 
         borrarRiegoBtn$$.setAttribute('data-id', dataId)
         editarRiegoBtn$$.setAttribute('data-id', dataId)
 
-
-        titModModif$$.innerHTML = "Lechugas"
-        
         // Seleccionamos todas las celdas de la tabla, que tengan el atributo data-id con el valor del id inicado. 
         // Cada objeto Riego tiene un id único. 
         

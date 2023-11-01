@@ -1,7 +1,34 @@
-// Rellena el campo SELECT con las horas del 01:00 a 02:00
+                <div id="datosRiegoModif" class="datosRiego">
 
-    horaInicio = hora.toString().padStart(2, '0') + ":00";
-    const nuevaHora = document.createElement('option');
-    nuevaHora.value = horaInicio;
-    nuevaHora.text  = horaInicio;
-    horaInicio$$.appendChild(nuevaHora)    
+                    <p id="info-riego-select">  </p>
+                    
+                    <!-- Fecha de riego -->
+                    <div>
+                        <label for="fecha">  </label>
+                        <select name="fecha" id="fechaRiegoModif">                         
+                        </select>
+                    </div>
+                    
+                    <!-- Hora inicio de inicio -->
+                    <div>                
+                        <label for="horaInicio"> Inicio de Riego: </label>
+                        <select name="horaInicio" id="horaInicioModif"> 
+                            <!-- horas generas con javascript-->
+                        </select>        
+                    </div>
+                    
+                    <!-- Hora fin de fin -->
+                    <div>
+                        <label for="horaFin"> Fin de Riego: </label>
+                        <select name="horaFin" id="horaFinModif"> 
+                            <!-- horas generas con javascript-->
+                        </select>        
+                    </div>
+
+                    <div>
+                        <button id="actRiego">   Actualizar </button>
+                        <button id="CancelarAct"> Cancelar </button>
+                    </div>
+
+                </div>
+            
