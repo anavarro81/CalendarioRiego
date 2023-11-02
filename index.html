@@ -16,7 +16,7 @@
 
 </table>
 <!-- Modal: Nuevo riego-->
-    <div id="nuevoRiego" class="modal">
+    <div id="nuevoRiego" class="modal no-mostrar-modal">
         <div class="modal-content">
             <div class="event-opt"> 
                 <img src="close-20px.png" id='btn-close-modal' alt="borrar">
@@ -58,7 +58,7 @@
     </div>
 
 <!-- Modal: Actualiza/borrar riego -->
-    <div id="Mostrar-Info-Riego" class="modal">
+    <div id="Mostrar-Info-Riego" class="modal no-mostrar-modal">
 
         <div class="modal-content" >
 
@@ -78,20 +78,21 @@
 
 <!-- Modal: Actualizar Riego -->
 
-<div id="Actualizar-Riego" class="modal">
+<div id="Actualizar-Riego" class="modal no-mostrar-modal">
 
     
         <div class="modal-content">
-            <div>
+            
+            <div class="event-opt"> 
             <!-- boton cerrar modal, vuelve al Calendario -->
-                <img src="close-20px.png" id='#' alt="cerrar">  
+                <img src="close-20px.png" id='close-modal-modif' alt="cerrar">  
             </div>
 
             <div id="Act-Riego-Content">
                 
             <!-- input --> 
 
-            <input type="text">
+            <input type="text" id="tituloRiegoModif">
             
             <!-- fecha -->
             <div>
@@ -113,16 +114,10 @@
                 </select>        
             </div>
 
+            <div>
+                <button id="actRiego"> Actualizar </button>
+            </div>
 
-
-
-
-
-            <!-- Fecha de inicio -->
-            <!-- hora inicio -->
-            <!-- hora fin -->
-            <!-- Boton -->
-        
             </div>
     
     

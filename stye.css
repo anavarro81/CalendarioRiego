@@ -70,7 +70,7 @@ td.no-expand {
 }
 
 .modal {
-    display: none;
+    /* display: none; */
     position: fixed;
     top: 0;
     left: 0;
@@ -86,6 +86,7 @@ td.no-expand {
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
 }
 
 #btn-close-modal {
@@ -119,3 +120,25 @@ td.no-expand {
     flex-direction: column;
 }
 
+#Actualizar-Riego {
+    display: none;
+}
+
+.mostrar-modal {
+    display: flex;
+}
+
+.no-mostrar-modal {
+    display: none;
+}
+
+#Act-Riego-Content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+#close-modal-modif {
+    margin-bottom: 10px;
+}

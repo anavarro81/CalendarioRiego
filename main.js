@@ -21,7 +21,7 @@ const encabFechas$$ = document.querySelector("#encab-fechas")
 const formRiego$$ = document.querySelector("#formRiego")
 
 const cerrarModalBtn = document.querySelector('#btn-close-modal')
-const cerrarModalModifBtn = document.querySelector('#btn-close-modalModif')
+
 
 
 // Modal Modif-Borrado. 
@@ -36,25 +36,36 @@ const infoRiegoSelect$$ = document.querySelector('#info-riego-select')
 const editarRiegoBtn$$ = document.querySelector('#editarRiego')
 const fechaRiegoModif$$ = document.querySelector("#fechaRiegoModif")
 
-const datosRiegoModif$$ = document.querySelector('#datosRiegoModif')
 
-const horaFinModif$$ = document.querySelector('#horaFinModif')
-const horaInicioModif$$ = document.querySelector('#horaInicioModif') 
-const actRiegoModal$$ = document.querySelector('#Actualizar-Riego') 
+
+
+
+
 
 //
 
 // ------------------------------------------------------------------------- //
-// Actualizar-Riego
+// Actualizar-Riego (Modal)
 // ----------------
 
 // Muestra los datos a editar del riego. 
+const actRiegoModal$$ = document.querySelector('#Actualizar-Riego') 
 
 // Act-Riego-Content 
 const actRiegoBtn$$ = document.querySelector('#actRiego')   
 
+// close-modal-modif
+// Boton cerra modal 
+const closeModalModifBtn$$ = document.querySelector('#close-modal-modif')
+
+const tituloRiegoModif$$ = document.querySelector('#tituloRiegoModif')
 
 
+// Hora de inicio de riego
+const horaInicioModif$$ = document.querySelector('#horaInicioModif')
+
+// Hora de fin de riego. 
+const horaFinModif$$ = document.querySelector('#horaFinModif')
 
 
 let calendario = []
@@ -80,6 +91,18 @@ class Riego {
     
     // Muestro nuevo modal para editar el riego. 
     actRiegoModal$$.style.display = 'flex';   
+
+    
+    // Buscamos en el array el indice recuperado. 
+    const indexRiego = calendario.findIndex(riego => riego.id === idRiego);
+
+    if (indexRiego !== -1) {
+        console.log('He encontrado el id de Riego = ', idRiego)
+        console.log(calendario[indexRiego].titulo)
+        
+    } else {
+        console.log('No he encontrado el id de Riego = ', idRiego)
+    }
     
     
     // Cargamos las fechas en el campo SELECT. 
@@ -101,10 +124,13 @@ const actualizarRiego = (idRiego) => {
     // Busca por id el riego a actualizar. 
     const indexRiego = calendario.findIndex(riego => riego.id === idRiego);
 
+
+    
+
     if (indexRiego !== -1) {
         console.log('He encontrado el id de Riego = ', idRiego)
-        console.log('Esta en la posición: ', indexRiego)
-        // arrayDeObjetos[indiceObjetoAModificar].nombre =
+        console.log(calendario[indexRiego].titulo)
+        
     } else {
         console.log('No he encontrado el id de Riego = ', idRiego)
     }
@@ -133,8 +159,9 @@ const closeModal = () => {
 }
 
 const closeModalModif = () => {
-    modalinfoRiego$$.style.display = 'none'
+    actRiegoModal$$.style.display = 'none'
 }
+
 
 
 
@@ -184,7 +211,7 @@ const mostrarDatosRiegoInput = (e) => {
         console.log('esta celda pertenece a la tarea: ' + dataId);
         modalinfoRiego$$.style.display = 'flex';
         infoRiegoModif.style.display = 'flex';
-        datosRiegoModif$$.style.display = 'none';
+        
 
         // Asigo el atributo data-id al boton del modal con el valor del id seleccinado para borrarlo si se hace click. 
         borrarRiegoBtn$$.setAttribute('data-id', dataId)
@@ -194,7 +221,7 @@ const mostrarDatosRiegoInput = (e) => {
         // Cada objeto Riego tiene un id único. 
         
 
-        console.log('Celdas Riego', celdasRiego)
+        
         borrarRiegoBtn$$.id = dataId
 
 
@@ -435,12 +462,14 @@ informarSelectFechas()
 
 formRiego$$.addEventListener('submit', grabarRiego)
 cerrarModalBtn.addEventListener('click', closeModal)
-cerrarModalModifBtn.addEventListener('click', closeModalModif)   
+   
 borrarRiegoBtn$$.addEventListener('click', borrarRiego)
 editarRiegoBtn$$.addEventListener('click', editarRiego)
 actRiegoBtn$$.addEventListener('click', actRiego)
 
-informarEventos(calendario)
+
+closeModalModifBtn$$.addEventListener('click', closeModalModif) 
+
 
 
 
