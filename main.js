@@ -22,6 +22,8 @@ const formRiego$$ = document.querySelector("#formRiego")
 
 const cerrarModalBtn = document.querySelector('#btn-close-modal')
 
+// Nuevo Riego
+const NuevoRiegoTit$$ = document.querySelector('#NuevoRiegoTit')
 
 
 // Modal Modif-Borrado. 
@@ -29,6 +31,8 @@ const cerrarModalBtn = document.querySelector('#btn-close-modal')
 
 const infoRiegoModif = document.querySelector('#info-riego-no-modif')
 const titModModif$$ = document.querySelector('#tit-mod-modif')
+const closeModalModif$$ = document.querySelector('#btn-close-modalModif')
+
 
 const borrarRiegoBtn$$ = document.querySelector('#borrarRiego')
 
@@ -94,14 +98,15 @@ class Riego {
 
     
     // Buscamos en el array el indice recuperado. 
-    const indexRiego = calendario.findIndex(riego => riego.id === idRiego);
+    const indexRiego = calendario.findIndex(riego => riego.id === dataId);
 
     if (indexRiego !== -1) {
-        console.log('He encontrado el id de Riego = ', idRiego)
+        console.log('He encontrado el id de Riego = ', dataId)
         console.log(calendario[indexRiego].titulo)
+        tituloRiegoModif$$.placeholder = calendario[indexRiego].titulo
         
     } else {
-        console.log('No he encontrado el id de Riego = ', idRiego)
+        console.log('No he encontrado el id de Riego = ', dataId)
     }
     
     
@@ -145,7 +150,7 @@ const actRiego = (e) => {
     let idRiego = editarRiegoBtn$$.getAttribute('data-id')
     
     // Obtener los valores intoducidos. 
-    fecha = fechaRiegoModif$$.value
+    // fecha = fechaRiegoModif$$.value
 
 
 
@@ -162,6 +167,9 @@ const closeModalModif = () => {
     actRiegoModal$$.style.display = 'none'
 }
 
+const closeInfoRiego = () => {
+    modalinfoRiego$$.style.display = 'none';
+}
 
 
 
@@ -220,7 +228,39 @@ const mostrarDatosRiegoInput = (e) => {
         // Seleccionamos todas las celdas de la tabla, que tengan el atributo data-id con el valor del id inicado. 
         // Cada objeto Riego tiene un id único. 
         
+        // Buscamos por id en el Array la informacion del riego. 
+        const indexRiego = calendario.findIndex(riego => riego.id === dataId);
 
+        if (indexRiego !== -1) {   
+            // Informamos el titulo del riego en el modal.          
+            titModModif$$.innerHTML = calendario[indexRiego].titulo            
+            
+            const [diasSemana, mes, anyo]  = calendario[indexRiego].fecha.split('-')
+            console.log(calendario[indexRiego].fecha)
+
+            let numOpciones = fechaRiegoModif$$.options.length
+
+            for (let ind=0; ind <numOpciones; ind++) {
+            
+                let fechaSelecionada = fechaRiegoModif$$.options[ind].value
+
+                if (fechaSelecionada.includes(diasSemana)) {
+
+                    let fechaDefecto = fechaRiegoModif$$.querySelector(`option[value="${fechaSelecionada}"]`);
+                    fechaDefecto.selected = true;
+
+                }
+            
+
+            }
+            
+        
+        } else {
+            console.log('No he encontrado el id de Riego = ', dataId)
+        }
+
+
+        titModModif$$.innerHTML = calendario[dataId].titulo
         
         borrarRiegoBtn$$.id = dataId
 
@@ -231,7 +271,9 @@ const mostrarDatosRiegoInput = (e) => {
     } else {
         // Modal: Nuevo Riego
         modal$$.style.display = 'flex';
-        
+
+        // Limpia el campo input para no manter el último valor introducido
+        NuevoRiegoTit$$.value = ""
         
         // Activa por defecto el dia de la celda seleccionada en el campo SELECT.   
         const [diaSemana, diaMes, mes, horaInicio] = e.target.id.split('-')
@@ -287,10 +329,10 @@ const grabarRiego = (e) => {
     let titulo = "" 
 
     // Si no se informa el cultivo a regar, se informa con un texto por defecto. 
-    if (e.target.titulo.value == ""){
+    if (e.target.NuevoRiegoTit.value == ""){
         titulo = '(Sin riego definido)'
     } else {
-        titulo = e.target.titulo.value
+        titulo = e.target.NuevoRiegoTit.value
     }
 
     let horaInicio = e.target.horaInicio.value
@@ -466,7 +508,7 @@ cerrarModalBtn.addEventListener('click', closeModal)
 borrarRiegoBtn$$.addEventListener('click', borrarRiego)
 editarRiegoBtn$$.addEventListener('click', editarRiego)
 actRiegoBtn$$.addEventListener('click', actRiego)
-
+closeModalModif$$.addEventListener('click', closeInfoRiego)
 
 closeModalModifBtn$$.addEventListener('click', closeModalModif) 
 
