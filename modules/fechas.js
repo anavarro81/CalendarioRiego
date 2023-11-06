@@ -141,6 +141,27 @@ const extraerDatosfecha = (fecha) => {
 // let fechaActual = new Date();
 // obtenerSemana(fechaActual)
 
-export { obtenerFechaActual, obtenerSemana, formatearFechaCompleta, extraerDatosfecha };
+
+// Convierte fecha DD-MM-AAAA a formato largo ("lunes, 6 de noviembre"). 
+
+const convertirFechaLargo = (fecha) => {
+
+}
+
+const convertirFechaDDMMAAAA = (fecha) => {
+
+    const [diaSemana, diaMes, , mesFecha] = fecha.split(" ")
+
+    const indexMes = meses.findIndex(mes => mes === mesFecha);
+
+    fecha = new Date (2023, indexMes, diaMes)
+
+    return fecha.getDay() + '-' + fecha.getMonth() + '-' + fecha.getFullYear()
+    
+
+}
+
+
+export { obtenerFechaActual, obtenerSemana, formatearFechaCompleta, extraerDatosfecha, convertirFechaDDMMAAAA };
     
 

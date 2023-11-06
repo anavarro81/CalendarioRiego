@@ -1,4 +1,4 @@
-import { obtenerFechaActual, obtenerSemana } from './modules/fechas.js';
+import { obtenerFechaActual, obtenerSemana, convertirFechaDDMMAAAA } from './modules/fechas.js';
 import {informarEventos} from './modules/calendar.js'
 
 const diasSemana = ["domingo", "lunes", "martes", "miercoles", "jueves", "sabado", "domingo"];
@@ -96,7 +96,15 @@ class Riego {
     // Muestro nuevo modal para editar el riego. 
     actRiegoModal$$.style.display = 'flex';   
 
-    
+    // Cargamos las fechas en el campo SELECT. 
+    informarFechasModif()
+
+    // Cargamos las horas INICIO en el campo SELECT
+    informarHorasSelect(horaInicioModif$$, horaFinModif$$)
+
+
+
+
     // Buscamos en el array el indice recuperado. 
     const indexRiego = calendario.findIndex(riego => riego.id === dataId);
 
@@ -104,21 +112,44 @@ class Riego {
         console.log('He encontrado el id de Riego = ', dataId)
         console.log(calendario[indexRiego].titulo)
         tituloRiegoModif$$.placeholder = calendario[indexRiego].titulo
+
+        // Obtenemos la fecha actual. 
+        const [dia, mes, anyo] = calendario[indexRiego].fecha.split('-')
+
+        let fechaRiego = new Date (anyo, mes-1, dia)
+
+        // Obtenemos el dia actual de la semana. Domingo = 0, Lunes = 1...
+        let diaSemana = fechaRiego.getDay()
+
+        
+        // Activamos en el SELECT de fechas, el valor de la fecha actual
+        if (diaSemana > 0) {
+            fechaRiegoModif$$[diaSemana-1].selected = true
+        } else {
+            fechaRiegoModif$$[0].selected = true
+        }
+
+        // Seleccionamos por defecto la hora de inicio previamente indicada. 
+        let horaInicio = calendario[indexRiego].horaInicio
+        let horaInicioSelect = horaInicioModif$$.querySelector(`option[value="${horaInicio}"]`);
+        horaInicioSelect.selected = true;
+
+        // Selecionamos por defecto la hora de fin previamente indicada. 
+        let horaFin = calendario[indexRiego].horaFinal
+        let horaFinal = horaFinModif$$.querySelector(`option[value="${horaFin}"]`);
+        horaFinal.selected= true;
+
         
     } else {
         console.log('No he encontrado el id de Riego = ', dataId)
     }
     
     
-    // Cargamos las fechas en el campo SELECT. 
-    informarFechasModif()
 
-    // Cargamos las horas INICIO en el campo SELECT
-    informarHorasSelect(horaInicioModif$$, horaFinModif$$)
     
     actualizarRiego(dataId)
     
-    // Cargamos las horas FIN en el campo SELECT
+    
 
 
 
@@ -148,9 +179,35 @@ const actRiego = (e) => {
     // Obtengo el id del riego a actualizar 
     
     let idRiego = editarRiegoBtn$$.getAttribute('data-id')
+
+    console.log('id riego = ', idRiego)
     
-    // Obtener los valores intoducidos. 
-    // fecha = fechaRiegoModif$$.value
+    let titulo = tituloRiegoModif$$.value
+
+    if (titulo == "") {
+        titulo = tituloRiegoModif$$.placeholder
+    }
+
+    // Obtener en que posicion (indice) está el elemento seleccionado, dentro del SELECT. 
+    let indice  = fechaRiegoModif$$.selectedIndex
+
+    let fechaConvertida  = convertirFechaDDMMAAAA (fechaRiegoModif$$.value)
+
+    let horaInicio = horaInicioModif$$.value
+    let horaFin = horaFinModif$$.value
+
+    // Buscar el indice
+    const indexRiego = calendario.findIndex(riego => riego.id === idRiego);
+
+    if (indexRiego !== -1) {
+
+        calendario[indexRiego].titulo = titulo
+        calendario[indexRiego].fecha = fechaConvertida
+        calendario[indexRiego].horaInicio = horaInicio
+        calendario[indexRiego].horaFinal = horaFin
+    }
+
+    console.log(calendario)
 
 
 
@@ -487,6 +544,12 @@ const informarSelectFechas = () => {
 }
 
 const informarFechasModif = () => {
+
+    
+    // Elimina todos los elementos hijo de fechas antes de insertarlos. 
+    while (fechaRiegoModif$$.firstChild) {
+        fechaRiegoModif$$.removeChild(fechaRiegoModif$$.firstChild);
+    }
 
     for (let fecha of fechasLit) {
         let fechaRiego = document.createElement("option")
