@@ -152,11 +152,14 @@ const convertirFechaDDMMAAAA = (fecha) => {
 
     const [diaSemana, diaMes, , mesFecha] = fecha.split(" ")
 
-    const indexMes = meses.findIndex(mes => mes === mesFecha);
+    let indexMes = meses.findIndex(mes => mes === mesFecha) 
+    
+    // Le sumanos 1 para obtener el numero de mes correcto. 
+    indexMes +=1
 
-    fecha = new Date (2023, indexMes, diaMes)
+    // fecha = new Date (2023, indexMes, diaMes)
 
-    return fecha.getDay() + '-' + fecha.getMonth() + '-' + fecha.getFullYear()
+    return diaMes + '-' + indexMes + '-' + '2023'
     
 
 }

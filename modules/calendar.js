@@ -24,8 +24,8 @@ const informarEventos = (calendario) => {
 
         for (let hora = horaInicio; hora <= horaFinal; hora++) {
             
-
-            let id = '#' + dayofWeek_prefix + '-' + dia + '-' + mes + '-' + ('0' + hora).slice(-2) 
+            // slice(-2) -> Nos quedamos con los dos últimos caracteres. 
+            let id = '#' + dayofWeek_prefix + '-' + ('0' + dia).slice(-2) + '-' + mes + '-' + ('0' + hora).slice(-2) 
             
             let celdaColor = document.querySelector(id)
             celdaColor.setAttribute('data-id', unicoId);

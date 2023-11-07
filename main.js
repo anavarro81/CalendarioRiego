@@ -182,14 +182,34 @@ const actRiego = (e) => {
 
     console.log('id riego = ', idRiego)
     
+    
+    // Elimina el formato, textos y data-id de las celdas actualizadas. 
+    
+    // seleccionado las celdas a actualizar. 
+    let celdasRiego = document.querySelectorAll(`td[data-id="${idRiego}"]`)
+
+    for (const celdaRiego of celdasRiego) {
+        celdaRiego.innerHTML = ""
+        celdaRiego.style.backgroundColor = "transparent";
+        celdaRiego.removeAttribute('data-id')
+    }
+    
+    // Elimina los textos de las todas las celdas.       
+    // Cambiar el color de fondo a trasparente de las celdas. 
+    // Se elimina el atributo data-id de las celdas. 
+
+    for (const celdaRiego of celdasRiego) {
+        celdaRiego.innerHTML = ""
+        celdaRiego.style.backgroundColor = "transparent";
+        celdaRiego.removeAttribute('data-id')
+    }
+
+    
     let titulo = tituloRiegoModif$$.value
 
     if (titulo == "") {
         titulo = tituloRiegoModif$$.placeholder
     }
-
-    // Obtener en que posicion (indice) está el elemento seleccionado, dentro del SELECT. 
-    let indice  = fechaRiegoModif$$.selectedIndex
 
     let fechaConvertida  = convertirFechaDDMMAAAA (fechaRiegoModif$$.value)
 
@@ -209,8 +229,9 @@ const actRiego = (e) => {
 
     console.log(calendario)
 
+    closeModalModif()
 
-
+    informarEventos(calendario)
 }
 
 
@@ -259,7 +280,9 @@ const borrarRiego = (e) => {
         celdaRiego.removeAttribute('data-id')
     }
 
-    closeModalModif()
+    closeInfoRiego()
+
+    console.log(calendario)
 
 }
 
