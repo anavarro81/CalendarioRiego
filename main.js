@@ -100,7 +100,7 @@ class Riego {
     informarFechasModif()
 
     // Cargamos las horas INICIO en el campo SELECT
-    informarHorasSelect(horaInicioModif$$, horaFinModif$$)
+    // informarHorasSelect(horaInicioModif$$, horaFinModif$$)
 
 
 
@@ -373,10 +373,23 @@ const mostrarDatosRiegoInput = (e) => {
             
 
         }
+
+        // Cargamos el SELECT "hora desde" con todas las horas desde 01:00 a 23:00.
+        informarHorasSelect(horaInicio$$)
+        
+        // Seleccionamos, por defecto, la hora de inicio de la celda seleccionada. 
+        let hora = horaInicio.toString() + ":00"
+        let horaInicioSelect = horaInicio$$.querySelector(`option[value="${hora}"]`);
+        horaInicioSelect.selected = true;
+
+        // La hora de fin, por defecto, será una hora posterior a la de inicio. 
+        // Se le suma 1 hora, se cambia a formato hh:00
+        
         let horaFin = parseInt(horaInicio) + 1   
             horaFin = horaFin.toString().padStart(2, '0') + ":00"
         
-        let hora = horaInicio.toString() + ":00"
+        let horaFinalSelect = horaFin$$.querySelector(`option[value="${horaFin}"]`);
+            horaFinalSelect.selected = true;
 
         
         infoRiegoSelect$$.innerHTML = `${diaSemana}, ${diaMes} de  ${meses[mes-1]} | ${hora}  &#8212  ${horaFin}`
@@ -399,11 +412,7 @@ const grabarRiego = (e) => {
 
     let [diaSemana, diaMes, mes, horaIni] = fechaRiego$$.innerHTML.split('-')
     
-    let fechaRiego = diaMes + '-' + mes + '-' + year
-
-    
-
-    // console.log(fechaRiego$$.innerHTML)
+    let fechaRiego = diaMes + '-' + mes + '-' + year    
 
     let id = generarIdUnico();
     let titulo = "" 
@@ -530,26 +539,25 @@ generarCabecera(fechas, posHoy)
 
 // Rellenamos los campos SELECT horaInicio y horaFin con las horas desde 01:00 a 23:00h
 
-const informarHorasSelect = (hInicio, hFin) => {
+const informarHorasSelect = (hInicio) => {
 
-    for (const hora of horasDia) {
     
-        let HourOptIni = document.createElement("option")
-        let HourOptFin = document.createElement("option")
+
+    for (const hora of  horasDia) {
+    
+        let HourOptIni = document.createElement("option")        
         
         HourOptIni.value = hora
-        HourOptIni.text = hora
-        HourOptFin.value = hora
-        HourOptFin.text = hora
+        HourOptIni.text = hora        
         
         hInicio.appendChild(HourOptIni)
-        hFin.appendChild(HourOptFin)
+        
     }
 
 }
 
 // Informa las horas 01:00 -> 23:00 para los campos SELECT. 
-informarHorasSelect(horaInicio$$, horaFin$$)
+// informarHorasSelect(horaInicio$$, horaFin$$)
 
 // Informa las fechas de riego para el formulario. 
 
